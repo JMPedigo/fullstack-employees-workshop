@@ -1,6 +1,12 @@
 /** @returns the employee created according to the provided details */
 export async function createEmployee({ name, birthday, salary }) {
-  // TODO
+  const sql = `
+  INSERT INTO employees
+  (name, birthday, salary)
+  VALUES
+  ($1, $2, $3)
+  RETURNING *;
+  `;
 }
 
 // === Part 2 ===
