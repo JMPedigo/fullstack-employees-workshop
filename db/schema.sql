@@ -5,6 +5,6 @@ CREATE TABLE employees (
     name text,
     birthday date,
     salary int
-    )
+    );
 
 
