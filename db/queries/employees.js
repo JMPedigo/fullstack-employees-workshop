@@ -7,8 +7,12 @@ export async function createEmployee({ name, birthday, salary }) {
   ($1, $2, $3)
   RETURNING *;
   `;
+  const values = [name, birthday, salary];
+  const {
+    rows: [employee],
+  } = await db.query(sql, values);
+  return employee;
 }
-
 // === Part 2 ===
 
 /** @returns all employees */
