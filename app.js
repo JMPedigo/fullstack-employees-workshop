@@ -2,4 +2,6 @@ import express from "express";
 const app = express();
 export default app;
 
-// TODO: this file!
+app.get("/", (req, res) => {
+  res.send("Welcome to the Fullstack Employees API.");
+});
