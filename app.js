@@ -4,6 +4,7 @@ export default app;
 
 import employeesRouter from "#api/employees";
 
+/** Body-parsing middleware */
 app.use(express.json());
 
 app.use("/employees", employeesRouter);
@@ -11,7 +12,7 @@ app.use("/employees", employeesRouter);
 app.get("/", (req, res) => {
   res.send("Welcome to the Fullstack Employees API.");
 });
-
+/** Error-handling middleware */
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send("Sorry! Something went wrong :(");
