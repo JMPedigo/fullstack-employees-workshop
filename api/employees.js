@@ -9,6 +9,7 @@ import {
   createEmployee,
   getEmployee,
   deleteEmployee,
+  updateEmployee,
 } from "#db/queries/employees";
 
 /** I need routing middleware for getEmployees */
@@ -53,6 +54,29 @@ router.param("id", async (req, res, next, id) => {
  */
 router.get("/:id", async (req, res) => {
   res.send(req.employee);
+});
+
+/**PUT /employees/:id
+ * updates employee with specified ID
+ * Send 400 if body not provided
+ * send 400 if request body is missing a required field
+ * send 404 if employee does not exist
+ * updates and sends employee with status 200
+ */
+router.put("/:id", async (req, res) => {
+  if (!req.body) return res.status(400).send("Request body must be provided.");
+
+  const { name, birthday, salary } = req.body;
+  if (!name || !birthday || !salary) {
+    return res.status(400).send("Request body is missing required field.");
+  }
+  const employee = await updateEmployee({
+    id: req.employee.id,
+    name,
+    birthday,
+    salary,
+  });
+  res.status(200).send(employee);
 });
 
 /**DELETE /employees/:id
