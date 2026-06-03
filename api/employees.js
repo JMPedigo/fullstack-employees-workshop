@@ -8,6 +8,7 @@ import {
   getEmployees,
   createEmployee,
   getEmployee,
+  deleteEmployee,
 } from "#db/queries/employees";
 
 /** I need routing middleware for getEmployees */
@@ -52,4 +53,13 @@ router.param("id", async (req, res, next, id) => {
  */
 router.get("/:id", async (req, res) => {
   res.send(req.employee);
+});
+
+/**DELETE /employees/:id
+ * Sends 404 if employee does not exist
+ * Deletes the specified employee and sends status 204
+ */
+router.delete("/:id", async (req, res) => {
+  await deleteEmployee(req.employee.id);
+  res.status(204).send("Employee has been deleted.");
 });
